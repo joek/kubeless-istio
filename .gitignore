@@ -11,3 +11,5 @@ node_modules/
 .sass-cache
 css/reveal.min.css
 js/reveal.min.js
+istiodemo/istio-0.7.1
+vendor/

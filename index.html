@@ -7,7 +7,7 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/white.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,210 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h2>Secure Serverless Functions with Istio</h2>
+					Johannes Engelke, 2018
+
+					<aside class="notes">
+						Before we start:
+						<ul>
+							<li>Who knows AWS Lambdas?</li>
+							<li>Who has used them?</li>
+						</ul>
+					</aside>
+				</section>
+				<!-- <section>
+					<small><small>
+						<p>Weitergabe und Vervielfältigung dieser Publikation oder von Teilen daraus sind, zu welchem Zweck und in welcher Form auch immer, ohne die ausdrückliche schriftliche Genehmigung durch SAP SE oder ein SAP-Konzernunternehmen nicht gestattet.</p>
+						<p>In dieser Publikation enthaltene Informationen können ohne vorherige Ankündigung geändert werden. Die von SAP SE oder deren Vertriebsfirmen angebotenen Softwareprodukte können Softwarekomponenten auch anderer Softwarehersteller enthalten. Produkte können länderspezifische Unterschiede aufweisen.</p>
+						<p>Die vorliegenden Unterlagen werden von der SAP SE oder einem SAP-Konzernunternehmen bereitgestellt und dienen ausschließlich zu Informationszwecken. <br/>
+							Die SAP SE oder ihre Konzernunternehmen übernehmen keinerlei Haftung oder Gewährleistung für Fehler oder Unvollständigkeiten in dieser Publikation. <br/>
+							Die SAP SE oder ein SAP-Konzernunternehmen steht lediglich für Produkte und Dienstleistungen nach der Maßgabe ein, die in der Vereinbarung über die jeweiligen Produkte und Dienstleistungen ausdrücklich geregelt ist. Keine der hierin enthaltenen Informationen ist als zusätzliche Garantie zu interpretieren. </p>
+						<p>Insbesondere sind die SAP SE oder ihre Konzernunternehmen in keiner Weise verpflichtet, in dieser Publikation oder einer zugehörigen Präsentation dargestellte Geschäftsabläufe zu verfolgen oder hierin wiedergegebene Funktionen zu entwickeln oder zu veröffentlichen. Diese Publikation oder eine zugehörige Präsentation, die Strategie und etwaige künftige Entwicklungen, Produkte und/oder Plattformen der SAP SE oder ihrer Konzernunternehmen können von der SAP SE oder ihren Konzernunternehmen jederzeit und ohne Angabe von Gründen unangekündigt geändert werden. Die in dieser Publikation enthaltenen Informationen stellen keine Zusage, kein Versprechen und keine rechtliche Verpflichtung zur Lieferung von Material, Code oder Funktionen dar. Sämtliche vorausschauenden Aussagen unterliegen unterschiedlichen Risiken und Unsicherheiten, durch die die tatsächlichen Ergebnisse von den Erwartungen abweichen können. Dem Leser wird empfohlen, diesen vorausschauenden Aussagen kein übertriebenes Vertrauen zu schenken und sich bei Kaufentscheidungen nicht auf sie zu stützen.</p>
+						<p>SAP und andere in diesem Dokument erwähnte Produkte und Dienstleistungen von SAP sowie die dazugehörigen Logos sind Marken oder eingetragene Marken der SAP SE (oder von einem SAP-Konzernunternehmen) in Deutschland und verschiedenen anderen Ländern weltweit. Alle anderen Namen von Produkten und Dienstleistungen sind Marken der jeweiligen Firmen. <br/>
+							Zusätzliche Informationen zur Marke und Vermerke finden Sie auf der Seite <a href="https://www.sap.com/corporate/de/legal/copyright.html">https://www.sap.com/corporate/de/legal/copyright.html</a>.</p>
+					</small></small>
+				</section> -->
+				<section>
+					<h2>Kubeless</h2>
+					<img src="img/kubeless.png"/>
+				</section>
+				<section>
+					<section data-background-iframe="https://istio.io/" data-background-interactive>
+						<aside class="notes">
+							<p>What is istio? - To get you all on the same page, let's quickly check, how istio is describing his self.</p>
+
+							<p>In this talk I will focus on the topic security. How istio improves the security of services, whitout any change to the code.</p>
+						</aside>
+					</section>
+					<section>
+						<h2>Istio Overview</h2>
+						<img src="img/arch.svg"/>
+						<aside class="notes">
+							<p><b>Envoy:</b> Proxy, written in C++ deployed as a sidecar in the same pod, or colocated inside a VM. TLS Termination, Proxiing, circut breaker, healthcheck, ...</p>
+							<p><b>Mixer:</b> Enforcing Access Controll and usage policies, collecting data. Proxy extracts data and forwards them to mixer for evaluation. Mixer and his plugins are evaluating the requests.</p>
+							<p><b>Pilot:</b> Service Discovery, traffic management, intelligent routing. Compiles high level routing rules in evoy specific configs and pushes them to envoy. Pilot is also abstracting the platform specifc discovery methods.</p>
+							<p><b>Istio-Auth:</b> Enables MutualTLS</p>
+						</aside>
+					</section>
+					<section>
+						<h2>Sidecar</h2>
+						<aside class="notes">
+							<p>Istio comes with an sidecar injector for kubernetes.</p>
+							<p>Every time a new pod is started, the sidecar injector is notified and injects the envoy. </p>
+							<p>During initialization, he is executing a script to redirect all traffic via envoy (using iptables).</p>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h2>Istio Security</h2>
+					<ul>
+						<li class="fragment" data-fragment-index="0"><b>Identity:</b> SPIFFE</li>
+						<li class="fragment" data-fragment-index="1"><b>Communication Security:</b> Mutual TLS</li>
+						<li class="fragment" data-fragment-index="2"><b>Keymanagement:</b> Per-Cluster CA</li>
+					</ul>
+					<aside class="notes">
+						<p>The low level security setup of istio is based on three components</p>
+						<p>Identity is based on SPIFFE and provides a strong service Identity.</p>
+						<p>Communication Security is based on Mutual TLS which ensures, that all traffic between components parts of the mesh is encrypted.</p>
+						<p>Keymanagement: Ensuresthe whole key livecycle, including creation and rotation of keys in the env CA</p>
+					</aside>
+				</section>
+				<section>
+					<section>
+						<h2>SPIFFE</h2>
+
+						<blockquote cite="https://spiffe.io/spiffe/">
+							The Secure Production Identity Framework For Everyone (SPIFFE) standard provides a specification for a framework capable of bootstrapping and issuing identity to services across heterogeneous environments and organizational boundaries.
+						</blockquote>
+						<small>https://spiffe.io/spiffe/</small>
+
+						
+					</section>
+					<section>
+						<h2>Spiffe Verifiable Identity Document (SVID)</h2>
+						<img src="img/SVID.jpeg" width="50%"/>
+					</section>
+				</section>
+				<section>
+					<h2>Communication Security</h2>
+					<ul>
+						<li class="fragment" data-fragment-index="0">Local connections between service and Envoy</li>
+						<li class="fragment" data-fragment-index="1">Mutual TLS connections between Envoys</li>
+						<li class="fragment" data-fragment-index="2">Validating Access Rules</li>
+					</ul>
+
+					<aside class="notes">
+						<p>Istio takes care, that the intire communication going over the network is encrypted.</p>
+
+						<ol>
+							<li>Envoy is deployed on each pod and handling all incomming and outgoing traffic</li>
+							<li>Communication between envoys is encrypted using Mutual TLS</li>
+							<li>Envoy is checking on client side if the service is allowed to provide the requested service. Service is validating if client is allowed to access it.</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<h2>Keymanagement</h2>
+					<ul>
+						<li class="fragment" data-fragment-index="0">Generate a SPIFFE key and certificate pair</li>
+						<li class="fragment" data-fragment-index="1">Distribute a key and certificate pair</li>
+						<li class="fragment" data-fragment-index="2">Rotate keys and certificates</li>
+						<li class="fragment" data-fragment-index="3">Revoke a specific key and certificate</li>
+					</ul>
+					<aside class="notes">
+						<p>Istio takes care about the whole Key livecycle.</p>
+
+						<ol>
+							<li>It generates a spiffe key and certs for each services accounts</li>
+							<li>It is injecting them into the related pods</li>
+							<li>It periodically rotates keys and certificates</li>
+							<li>If necesary it is revoking certs.</li>
+						</ol>
+
+					</aside>
+				</section>
+				<section>
+					<h2>Istio Security</h2>
+					<img src="img/security.svg"/>
+
+					<aside class="notes">
+						<p>With this system we asure the identity of the communication partners and the privacy? of the communication.</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Demo Architecture</h2>
+					<!-- TODO: Demo Architecture -->
+				</section>
+				<section>
+					<h2>Demo MutualTLS</h2>
+					<aside class="notes">
+						<ol>
+							<li>Login to jumpbox (without sidecar)</li>
+							<li>curl http://product-service:8080/products/</li>
+							<li>Edit jumpbox</li>
+							<li>Check again</li>
+						</ol>
+						<p>
+							With MutualTLS and SPIFEE we are sure we are always talking to the system we like to talk as istio assures the identity of the service as well as encrypts the connection. 
+						</p>
+						<p>
+							So it is reducing the chance for a man in the middle attack.
+						</p>
+						<p>
+							Never the less, it is not handling authorization, so if I am in the mesh, I can talk to anybody.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Istio Ingress</h2>
+					<aside class="notes">
+						<p>If we like to expose a service to the internet, we have to be part of the service mesh</p>
+						<p>Istio ingress is part of the mesh</p>
+						<ol>
+							<li>Deploy shop-ing.yaml</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<section>
+						<h2>JWT Authentication</h2>
+						<img src="img/arch.svg"/>
+						<aside class="notes">
+							<p>Just to recap: Authentication is done in envoy. Pilot is distributing envoy configuration, then envoy does the authentication.</p>
+							<p>Sofar, we enabled authentication for services inside the mesh only. Now we like to enable it for clients outside of the mesh using JWT.</p>
+						</aside>
+					</section>
+					<section>
+						<h2>JWT Demo</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Istio RBAC</h2>
+						<img src="img/IstioRBAC.svg"/>
+						<aside class="notes">
+							<p>Next step: authorization using RBAC rules. One worde about RBAC rules, we are talking now about istio RBAC rules. There are RBAC rules for k8s too, but they are different.</p>
+							<p>Istio RBAC is based on Mixer Adapters, so the policies are applied inside the mixer.</p>
+						</aside>
+					</section>
+					<section>
+						<h2>RBAC Demo</h2>
+					</section>
+				</section>
+				<section>
+					<h2>Conclusion</h2>
+					<ul>
+						<li>Istio is super interesting</li>
+						<li>Istio is not production ready</li>
+						<li>Istio <a href="https://istio.io">docs</a> are awesome</li>
+						<li>Kubeless is boring</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Thank you</h1>
+					@quablab<br/> johannes.engelke@sap.com<br/> github.com/joek
+				</section>
 			</div>
 		</div>
 

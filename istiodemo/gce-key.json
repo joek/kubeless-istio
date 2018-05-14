@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "istio-test-202708",
+  "private_key_id": "d3bd4b63fb8bb4bda3d0ad12f6789c3763c26ce8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+qahsKv3jFmO9\nRUF2ibDrvM5qRIN1SPDRAQRZisger7o3ICQ92un0t9tNf0ftzSKNX5Gi4HiX1feY\nhvOSDER3jRYJE5ERgeM7d+2zucFE9ZHZ4r0JxxjQrrw0WKP2bwFfxcG8eXCBgw4v\n5No4hVJ1ueucNi35EJ08uMKlr5w71DkIBopC82VzHeFgb/Of8PnlQZSYU6vr0NDW\nA6KwcWTYS9VIzT1U0C0vUvKwtRqMUbT4B1rr71sfKobynvaqp+5LW7DxarklKhcu\nVnEC4Yp5NxQglz1uDbGWbjFfxXjf0Bqx5pfAGUqyzBdCJlK9LyUR052h7ncPPBsg\nzHeuHyMRAgMBAAECggEABMlTEFYa9hC5k8aRkGWAAscEYpASQcdBPmn5XzsX74dH\nVDtzFXdxsKJN99nWZy6ja6umxxE+DcfCFbrrkfLLZDnvP+6VEXyyhOtrlPu4kZ/d\nl7v0tXJhWdnNIT5JbXYXcX1QMghVbfbpjAPBg7I7Iff3JX6JtGs5m0zjHBA2ypyr\n5j8MVnzxnqqiZsE+BO0X+9NqvtajbzVEg36FHQBRc32feW8k3wfOPl03wSA9UiNh\n2Z3L1OK01f+KWxpJYfOa6pmBPTXRWOcZ7F5GHEoIi5s/fhx3sq7vjvV7UQvW2Z7Z\nEeZY0YKtXx98a1F8UJAV1Rf+cu/FxVtUY9UbLAN+LQKBgQDzAlsX4lHv8T+kRsRd\n55GiRazqv5RFyI2duNYDIWTxw+PG1UmK1i3WLksRAQv/YFMpXT8S2DvTFoqOTCfV\n7lfEWvG/qd22XsvihmMElEbsq7C567c1i4jcWMtvG/zNIB3/YiB7qq88RT83Jyb1\nIPOUttCeX6SnoPRcVFcN97n0tQKBgQDI2u1KidIbIDCeNilYJ4fZ32RWt4GfWCx8\njhlq4pPKIOG9m8Hjtvj3UqYRopdWUZQx5tkEPwejJ2n2S0MLEfj4ixeJ7ZEMJ4JK\n/UQ4zVd2TDcFJ4nltRAieS9qsmQNlpYvlCw6DwkO9vd+TYEdawBCBbFDCIbF4VSV\nMIJ7jINqbQKBgFu9JvCEUxR3CeSVhqpAsp0FGrtgabRSewvw7HIwGDChGAtHF8Vf\nB9zUiyg3MfVNwvdZqWcO1L7iwpnnrB46JU4OWzdVBEtFzEiPHTBsXb4ZLtVxZC/F\npnww1VPzx+MUXd68h7DIBfGF3tCOakmeD/azcVxolPtnavi0Kk0umTgFAoGAQMk0\n7u0Dg1JfvDh2H4QosqL2x23Ldq1HNCnVkv9gcjsm9TTPVncHWSckf920+Ne5eFsg\nttjpyruE1zexeVmjt++NeSTSu1vnD+8fWT8KrhKpUJVPSnObr7LtE3pVAXkIGnKt\nzVBaOKR6chfnxKhl3eXeJmQSrLMgyDpsbBOHtAUCgYEApDGT9NAlzevJiGy5i+bX\npICbijHm4DonV1/bg7k7uUXyV+g3e2pdP5RviULv0O9szuXux8vUkx00DxdkDyoZ\nuQ1eUaeVxv5dYVIVSHXZx9ZIQEZyUX/3eyLw5E4HIDgdjYL9JFhTxrU+qeYjXN1m\nZQrY381B4PR7Otpu4yU+a8U=\n-----END PRIVATE KEY-----\n",
+  "client_email": "beershop@istio-test-202708.iam.gserviceaccount.com",
+  "client_id": "103158822616154461684",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/beershop%40istio-test-202708.iam.gserviceaccount.com"
+}

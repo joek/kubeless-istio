@@ -1,0 +1,25 @@
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: ServiceRole
+metadata:
+  name: etcd
+  namespace: default
+spec:
+  rules:
+  - services: 
+    - "etcd-client.default.svc.cluster.local"
+    - "etcd.default.svc.cluster.local"
+    methods: ["*"]
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: ServiceRoleBinding
+metadata:
+  name: etcd-binding
+  namespace: default
+spec:
+  subjects:
+  - properties:
+      namespace: "default"
+  roleRef:
+    kind: ServiceRole
+    name: "etcd"
