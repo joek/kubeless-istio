@@ -29,11 +29,9 @@
 					Johannes Engelke, 2018
 
 					<aside class="notes">
-						Before we start:
-						<ul>
-							<li>Who knows AWS Lambdas?</li>
-							<li>Who has used them?</li>
-						</ul>
+						<p>What is the Idea of serverless? The Idea is, to offload most of the responsibilities like security, metering etc. into the serverless plattform.</p>
+						<p>A FaaS execution system like kubeless is only a astarting point. On top other systems has to deliver functionalities.</p>
+						<p>In this talk we will focus on the security topics, Istio can solve for us. Beside that istio is delivering much mor, to make kubeless a really powerfull solution. We might have time to think about it at the end of the talk.</p>
 					</aside>
 				</section>
 				<!-- <section>
@@ -88,7 +86,7 @@
 					</ul>
 					<aside class="notes">
 						<p>The low level security setup of istio is based on three components</p>
-						<p>Identity is based on SPIFFE and provides a strong service Identity.</p>
+						<p>Identity is based on SPIFFE (Secure Production Identity Framework for Everyone) and provides a strong service Identity.</p>
 						<p>Communication Security is based on Mutual TLS which ensures, that all traffic between components parts of the mesh is encrypted.</p>
 						<p>Keymanagement: Ensuresthe whole key livecycle, including creation and rotation of keys in the env CA</p>
 					</aside>
@@ -157,7 +155,7 @@
 				</section>
 				<section>
 					<h2>Demo Architecture</h2>
-					<!-- TODO: Demo Architecture -->
+					<img src="img/demo.JPG" width="50%"/>
 				</section>
 				<section>
 					<h2>Demo MutualTLS</h2>
@@ -226,7 +224,7 @@
 				</section>
 				<section>
 					<h1>Thank you</h1>
-					@quablab<br/> johannes.engelke@sap.com<br/> github.com/joek
+					@quablab<br/> johannes.engelke@sap.com<br/> github.com/joek<br /><a href="https://joek.github.io/kubeless-istio/">joek.github.io/kubeless-istio/</a>
 				</section>
 			</div>
 		</div>
